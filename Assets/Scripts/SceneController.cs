@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class SceneController : MonoBehaviour
 {
+    public static SceneController instance;
     private GameController gameController;
+
+    public Transform respawnPoint;
 
     // Start is called before the first frame update
     void Start()
     {
         gameController = GetComponent<GameController>();
+        instance = this;
     }
     private void EndCutscene()
     {
@@ -95,6 +99,12 @@ public class SceneController : MonoBehaviour
         }
         EndCutscene();
         yield break;
+    }
+
+    public void InteractWithVoid(InteractableObject obj)
+    {
+        Debug.Log("Fall out of earth");
+        PlayerController.instance.MoveTo(respawnPoint.position);
     }
 
     public void InteractWithPlaceholderObject(InteractableObject obj)

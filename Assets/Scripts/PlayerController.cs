@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     Vector3 velocity;
     bool isGrounded;
+    bool frozen;
 
     // MouseLook
     public float mouseSensitivity = 500f;
@@ -42,6 +43,21 @@ public class PlayerController : MonoBehaviour
         UpdateInteraction();
     }
 
+    public void MoveTo(Vector3 vec)
+    {
+        Debug.LogFormat("Moving to {0}", vec);
+        transform.position = vec;
+        velocity.y = 0;
+        isGrounded = true;
+        frozen = true;
+        Invoke("Unfreeze", 0.2f);
+    }
+
+    public void Unfreeze()
+    {
+        frozen = false;
+    }
+
     void UpdateCamera()
     {
         if (GameController.instance.activeUIController != null)
@@ -59,6 +75,9 @@ public class PlayerController : MonoBehaviour
 
     void UpdateMovement()
     {
+        if (frozen)
+            return;
+
         if (GameController.instance.activeUIController != null)
             return;
 
@@ -76,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
         characterController.Move(move * speed * Time.deltaTime);
 
-        //Debug.LogFormat("{0} {1}",isGrounded, velocity.y);
+        //Debug.LogFormat("{0} {1}", isGrounded, velocity.y);
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {

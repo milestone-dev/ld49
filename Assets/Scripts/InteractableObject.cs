@@ -35,9 +35,4 @@ public class InteractableObject : MonoBehaviour
 
         this.onInteract.Invoke();
     }
-
-    public void Collide()
-    {
-            
-    }
 }
