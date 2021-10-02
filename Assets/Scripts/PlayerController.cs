@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
     public Camera playerCamera;
     CharacterController characterController;
+    public ParticleSystem warpParticles;
 
     public float walkSpeed = 12;
     public float runSpeed = 24;
@@ -50,7 +51,8 @@ public class PlayerController : MonoBehaviour
         velocity.y = 0;
         isGrounded = true;
         frozen = true;
-        Invoke("Unfreeze", 0.2f);
+        Invoke("Unfreeze", 0.01f);
+        warpParticles.Play();
     }
 
     public void Unfreeze()
