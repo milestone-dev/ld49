@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
             if (interactable && interactable.interactionEnabled && interactable.triggerType == InteractionTriggerType.Click)
             {
                 showCrosshair = true;
-                GameController.instance.ActivateInteractionCrosshair();
+                GameController.instance.ActivateInteractionCursor();
                 if (Input.GetMouseButtonDown(0))
                 {
                     interactable.Interact();
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
         }
         if (!showCrosshair)
         {
-            GameController.instance.DeactivateInteractionCrosshair();
+            GameController.instance.DeactivateInteractionCursor();
         }
     }
 
