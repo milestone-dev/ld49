@@ -13,6 +13,7 @@ public class SceneController : MonoBehaviour
     public Transform respawnPoint;
 
     public UIController bookUIController;
+    public UIController messageUIController;
     public UIController scrollUIController;
     public UIController keypadUIController;
 
@@ -296,6 +297,11 @@ public class SceneController : MonoBehaviour
                 CutsceneStep.MoveBy(obj.transform, new Vector3(-0.2f, 0, 0), 1f),
             });
         }
+    }
+
+    public void InteractWithBottle(InteractableObject obj)
+    {
+        messageUIController.Activate();
     }
 
     public void InteractWithAlchemistScroll(InteractableObject obj)
