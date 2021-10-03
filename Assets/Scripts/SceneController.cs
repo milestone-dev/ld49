@@ -210,8 +210,8 @@ public class SceneController : MonoBehaviour
 
         StartCutscene(new List<CutsceneStep>()
         {
-                CutsceneStep.Transmission("Day 99: The architecture of this tower must place this chunk of land in the early 13th century. The tower itself is simplistic and featureless, almost as if the builders didn't have time finish construction. Based on my somewhat limited knowledge of medieval history and  architecture, I am assuming its origin point is somewhere in eastern Europe.", Resources.Load<AudioClip>("Audio/d06a")),
-                CutsceneStep.Transmission("The barrels within are sealed shut, and I dare not break them open. The panel in the center of the room is most intriguing. My attempts to open it has so far failed. The socket-like hole seems to be shaped for some type of keystone. But what?", Resources.Load<AudioClip>("Audio/d06b")),
+                CutsceneStep.Transmission("Day 99: The architecture of this tower must place this chunk of land in the early 13th century. The tower itself is simplistic and featureless, almost as if the builders didn't have time finish construction. Based on my somewhat limited knowledge of medieval history and  architecture, I am assuming its origin point is somewhere in eastern Europe. I will try to date it though radiometric dating.", Resources.Load<AudioClip>("Audio/d05a")),
+                CutsceneStep.Transmission("The barrels within are sealed shut, and I dare not break them open. The panel in the center of the room is most intriguing. My attempts to open it has so far failed. The socket-like hole seems to be shaped for some type of keystone. But what?", Resources.Load<AudioClip>("Audio/d05b")),
 
         });
     }
@@ -269,6 +269,8 @@ public class SceneController : MonoBehaviour
     {
         GameController.instance.AddItem(Item.Ruby);
         Destroy(obj.gameObject);
+        PlayerController.instance.SwitchToItem(Item.Ruby);
+
     }
 
 
@@ -298,6 +300,9 @@ public class SceneController : MonoBehaviour
 
     public void InteractWithAlchemistScroll(InteractableObject obj)
     {
+        scrollUIController.Activate();
+
+
         if (!GameController.instance.IsSwitchSet(Switch.KnowCodeToLighthouse))
             GameController.instance.SetSwitch(Switch.KnowCodeToLighthouse);
     }
