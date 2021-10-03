@@ -37,6 +37,8 @@ public class GameController : MonoBehaviour
     public AudioSource clipAudioSource;
     public GameObject interactionCursorActive;
 
+    public bool paused;
+
     void Start()
     {
         instance = this;

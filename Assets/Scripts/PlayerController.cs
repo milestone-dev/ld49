@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
 
     void UpdateCamera()
     {
-        if (GameController.instance.activeUIController != null)
+        if (GameController.instance.activeUIController != null || GameController.instance.paused)
             return;
 
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
         if (frozen)
             return;
 
-        if (GameController.instance.activeUIController != null)
+        if (GameController.instance.activeUIController != null || GameController.instance.paused)
             return;
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour
 
     void UpdateInteraction()
     {
-        if (GameController.instance.activeUIController != null)
+        if (GameController.instance.activeUIController != null || GameController.instance.paused)
             return;
 
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);

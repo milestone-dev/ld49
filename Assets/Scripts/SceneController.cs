@@ -16,6 +16,7 @@ public class SceneController : MonoBehaviour
     public UIController messageUIController;
     public UIController scrollUIController;
     public UIController keypadUIController;
+    public UIController outroUIController;
 
     bool keypadProgress;
     string lastKeypadInput;
@@ -78,13 +79,12 @@ public class SceneController : MonoBehaviour
     {
         isRunningCutscene = false;
         gameController.RestoreMusicAudio();
-        Debug.Log("EndCutscene");
+        //Debug.Log("EndCutscene");
     }
 
     private IEnumerator ExecuteCutscene(List<CutsceneStep> steps)
     {
         bool skippable = false; // TODO figure out
-        Debug.Log(steps);
         foreach (CutsceneStep step in steps)
         {
             if (step.clip)
@@ -315,10 +315,7 @@ public class SceneController : MonoBehaviour
 
     public void InteractWithLighthouseDoor(InteractableObject obj)
     {
-        StartCutscene(new List<CutsceneStep>()
-        {
-            CutsceneStep.DisplayText("Rattle rattle", 0.5f),
-        });
+        
     }
 
     public void InteractWithLighthouseKeypad(InteractableObject obj)
@@ -358,6 +355,7 @@ public class SceneController : MonoBehaviour
             gameController.SetSwitch(Switch.HasUnlockedLighthouse);
             keypadUIController.Dismiss();
 
+            GameController.instance.paused = true;
             Invoke("StartOutroCutscene", 0.5f);
             return;
         }
@@ -369,8 +367,15 @@ public class SceneController : MonoBehaviour
     {
         StartCutscene(new List<CutsceneStep>()
         {
-            CutsceneStep.DisplayText("Who are you?", 2f),
+            CutsceneStep.Transmission("I can't believe someone has finally come for me after all this time. Please, come in. We have a lot to talk about... and a timeline to save.", Resources.Load<AudioClip>("Audio/outro")),
         });
+        Invoke("ShowOutroScreen", 12f);
+
+    }
+
+    void ShowOutroScreen()
+    {
+        outroUIController.Activate();
     }
 
 }
