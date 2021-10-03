@@ -13,6 +13,7 @@ public class CutsceneStep
     public Transform transform;
     public Vector3 scaleByVector = Vector3.zero;
     public Vector3 moveByVector = Vector3.zero;
+    public Vector3 rotateToVector = Vector3.zero;
 
     public string animationProperty;
     public bool animationValue;
@@ -70,6 +71,15 @@ public class CutsceneStep
         var action = new CutsceneStep();
         action.transform = transform;
         action.moveByVector = moveByVector;
+        action.duration = duration;
+        return action;
+    }
+
+    public static CutsceneStep RotateTo(Transform transform, Vector3 rotateToVector, float duration, bool waitUntilDone = false)
+    {
+        var action = new CutsceneStep();
+        action.transform = transform;
+        action.rotateToVector = rotateToVector;
         action.duration = duration;
         return action;
     }

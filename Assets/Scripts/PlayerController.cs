@@ -55,12 +55,12 @@ public class PlayerController : MonoBehaviour
 
     public void MoveTo(Vector3 vec)
     {
-        Debug.LogFormat("Moving to {0}", vec);
+        //Debug.LogFormat("Moving to {0}", vec);
         transform.position = vec;
         velocity.y = 0;
         isGrounded = true;
         frozen = true;
-        Invoke("Unfreeze", 0.01f);
+        Invoke("Unfreeze", 0.1f);
         warpParticles.Play();
     }
 
@@ -79,18 +79,37 @@ public class PlayerController : MonoBehaviour
         heldItemRuby.SetActive(false);
     }
 
-    void UpdateInventoryManagement()
+    public void SwitchToItem(Item item)
+    {
+        if (!GameController.instance.PlayerHasItem(item))
+            return;
+
+        GameController.instance.heldItem = item;
+        UpdateInventoryManagement(true);
+    }
+
+    public void PutBackHeldItem()
+    {
+        GameController.instance.ResetHeldItem();
+        HideAllHeldItems();
+    }
+
+    void UpdateInventoryManagement(bool forceUpdate = false)
     {
         if (GameController.instance.PlayerIsHoldingItem(Item.None))
         {
             HideAllHeldItems();
         }
 
+        bool updateInventoryDisplay = forceUpdate;
         if (Input.GetKeyUp(KeyCode.Tab))
         {
+            updateInventoryDisplay = true;
             GameController.instance.SwitchToNextHeldItem();
             Debug.LogFormat("Switching to item: {0}", GameController.instance.heldItem);
-            // TODO activate the right item
+        }
+
+        if (updateInventoryDisplay) {
             switch(GameController.instance.heldItem)
             {
                 case Item.Axe:

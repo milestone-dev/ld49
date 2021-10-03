@@ -91,6 +91,8 @@ public class SceneController : MonoBehaviour
                     StartCoroutine(ScaleTransform(step.transform, step.scaleByVector, step.duration));
                 if (step.moveByVector != Vector3.zero)
                     StartCoroutine(PositionTransform(step.transform, step.moveByVector, step.duration));
+                if (step.rotateToVector != Vector3.zero)
+                    StartCoroutine(RotationTransform(step.transform, step.rotateToVector, step.duration));
             }
 
             if (step.interactableObject)
@@ -125,7 +127,7 @@ public class SceneController : MonoBehaviour
 
     public void InteractWithVoid(InteractableObject obj)
     {
-        Debug.Log("Fall out of earth");
+        //Debug.Log("Fall out of earth");
         PlayerController.instance.MoveTo(respawnPoint.position);
     }
 
@@ -141,9 +143,18 @@ public class SceneController : MonoBehaviour
 
     public void InteractWithTree(InteractableObject obj)
     {
-        StartCoroutine(
-            RotationTransform(obj.transform, new Vector3(60, 90, 6), 1)
-        );
+        if (GameController.instance.PlayerIsHoldingItem(Item.Axe))
+        {
+            PlayerController.instance.PutBackHeldItem();
+            StartCoroutine(RotationTransform(obj.transform, new Vector3(60, 90, 6), 1));
+        } else
+        {
+            StartCutscene(new List<CutsceneStep>()
+            {
+                CutsceneStep.RotateTo(obj.transform, new Vector3(10, 90, 6), 0.2f, true),
+                CutsceneStep.RotateTo(obj.transform, new Vector3(0, 90, 6), 0.2f, true),
+            });
+        }
     }
 
     public void InteractWithPond(InteractableObject obj)
@@ -170,12 +181,14 @@ public class SceneController : MonoBehaviour
     {
         Destroy(obj.gameObject);
         GameController.instance.AddItem(Item.Axe);
+        PlayerController.instance.SwitchToItem(Item.Axe);
     }
 
     public void InteractWithShovel(InteractableObject obj)
     {
         Destroy(obj.gameObject);
         GameController.instance.AddItem(Item.Shovel);
+        PlayerController.instance.SwitchToItem(Item.Shovel);
     }
 
     public void InteractWithLighthouse(InteractableObject obj)

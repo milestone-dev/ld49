@@ -88,7 +88,7 @@ public class GameController : MonoBehaviour
 
     public void ResetHeldItem()
     {
-        heldItem = 0;
+        heldItem = Item.None;
     }
 
     public bool PlayerIsHoldingItem(Item item)
