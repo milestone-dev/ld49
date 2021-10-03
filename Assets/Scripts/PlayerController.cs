@@ -12,9 +12,6 @@ public class PlayerController : MonoBehaviour
     public GameObject heldItemContainer;
     public GameObject heldItemAxe;
     public GameObject heldItemShovel;
-    public GameObject heldItemVial;
-    public GameObject heldItemFilledVial;
-    public GameObject heldItemSodiumCrystal;
     public GameObject heldItemRuby;
 
     public float walkSpeed = 12;
@@ -73,9 +70,6 @@ public class PlayerController : MonoBehaviour
     {
         heldItemAxe.SetActive(false);
         heldItemShovel.SetActive(false);
-        heldItemVial.SetActive(false);
-        heldItemFilledVial.SetActive(false);
-        heldItemSodiumCrystal.SetActive(false);
         heldItemRuby.SetActive(false);
     }
 
@@ -118,15 +112,6 @@ public class PlayerController : MonoBehaviour
                     break;
                 case Item.Shovel:
                     heldItemShovel.SetActive(true);
-                    break;
-                case Item.Vial:
-                    heldItemVial.SetActive(true);
-                    break;
-                case Item.FilledVial:
-                    heldItemFilledVial.SetActive(true);
-                    break;
-                case Item.SodiumCrystal:
-                    heldItemSodiumCrystal.SetActive(true);
                     break;
                 case Item.Ruby:
                     heldItemRuby.SetActive(true);

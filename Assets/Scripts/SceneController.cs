@@ -147,16 +147,6 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    public void InteractWithPond(InteractableObject obj)
-    {
-        if(GameController.instance.PlayerIsHoldingItem(Item.Vial))
-        {
-            GameController.instance.RemoveItem(Item.Vial);
-            GameController.instance.AddItem(Item.FilledVial);
-            GameController.instance.ResetHeldItem();
-        }
-    }
-
     public void InteractWithDD1(InteractableObject obj)
     {
         StartCutscene(new List<CutsceneStep>()
@@ -225,6 +215,28 @@ public class SceneController : MonoBehaviour
         Destroy(obj.gameObject);
         GameController.instance.AddItem(Item.Shovel);
         PlayerController.instance.SwitchToItem(Item.Shovel);
+    }
+
+
+    public void InteractWithTreasureRock(InteractableObject obj)
+    {
+        if (GameController.instance.IsSwitchSet(Switch.KnowWhereTreasureIsBuried) && GameController.instance.PlayerIsHoldingItem(Item.Shovel))
+        {
+            PlayerController.instance.PutBackHeldItem();
+            Destroy(obj.gameObject);
+        }
+    }
+
+    public void InteractWithRuby(InteractableObject obj)
+    {
+        GameController.instance.AddItem(Item.Ruby);
+        Destroy(obj.gameObject);
+    }
+
+
+    public void InteractWithPirateBook(InteractableObject obj)
+    {
+        GameController.instance.SetSwitch(Switch.KnowWhereTreasureIsBuried);
     }
 
     public void InteractWithLighthouse(InteractableObject obj)

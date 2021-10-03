@@ -6,6 +6,7 @@ using UnityEngine;
 public enum Switch
 {
     None,
+    KnowWhereTreasureIsBuried,
     HasUnlockedLighthouse,
     GameWon
 };
@@ -15,10 +16,7 @@ public enum Item
     None,
     Axe,
     Shovel,
-    Vial,
     Ruby,
-    SodiumCrystal,
-    FilledVial
 };
 
 public class GameController : MonoBehaviour
