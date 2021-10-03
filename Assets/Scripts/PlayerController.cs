@@ -9,6 +9,14 @@ public class PlayerController : MonoBehaviour
     CharacterController characterController;
     public ParticleSystem warpParticles;
 
+    public GameObject heldItemContainer;
+    public GameObject heldItemAxe;
+    public GameObject heldItemShovel;
+    public GameObject heldItemVial;
+    public GameObject heldItemFilledVial;
+    public GameObject heldItemSodiumCrystal;
+    public GameObject heldItemRuby;
+
     public float walkSpeed = 12;
     public float runSpeed = 24;
     public float gravity = -9.81f;
@@ -30,11 +38,11 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         instance = this;
+        HideAllHeldItems();
         playerCamera = Camera.main;
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
     }
-
 
     // Update is called once per frame
     void Update()
@@ -61,11 +69,21 @@ public class PlayerController : MonoBehaviour
         frozen = false;
     }
 
+    void HideAllHeldItems()
+    {
+        heldItemAxe.SetActive(false);
+        heldItemShovel.SetActive(false);
+        heldItemVial.SetActive(false);
+        heldItemFilledVial.SetActive(false);
+        heldItemSodiumCrystal.SetActive(false);
+        heldItemRuby.SetActive(false);
+    }
+
     void UpdateInventoryManagement()
     {
         if (GameController.instance.PlayerIsHoldingItem(Item.None))
         {
-            // Deactivate all display items
+            HideAllHeldItems();
         }
 
         if (Input.GetKeyUp(KeyCode.Tab))
@@ -73,6 +91,27 @@ public class PlayerController : MonoBehaviour
             GameController.instance.SwitchToNextHeldItem();
             Debug.LogFormat("Switching to item: {0}", GameController.instance.heldItem);
             // TODO activate the right item
+            switch(GameController.instance.heldItem)
+            {
+                case Item.Axe:
+                    heldItemAxe.SetActive(true);
+                    break;
+                case Item.Shovel:
+                    heldItemShovel.SetActive(true);
+                    break;
+                case Item.Vial:
+                    heldItemVial.SetActive(true);
+                    break;
+                case Item.FilledVial:
+                    heldItemFilledVial.SetActive(true);
+                    break;
+                case Item.SodiumCrystal:
+                    heldItemSodiumCrystal.SetActive(true);
+                    break;
+                case Item.Ruby:
+                    heldItemRuby.SetActive(true);
+                    break;
+            }
         }
     }
 
