@@ -43,6 +43,18 @@ public class SceneController : MonoBehaviour
         }
     }
 
+    IEnumerator RotationTransform(Transform transform, Vector3 rotation, float duration)
+    {
+        Quaternion initialQuaternion = transform.localRotation;
+        Quaternion targetRotation = Quaternion.Euler(rotation);
+        for (float time = 0; time < duration; time += Time.deltaTime)
+        {
+            float progress = time / duration;
+            transform.localRotation = Quaternion.Lerp(initialQuaternion, targetRotation, progress);
+            yield return null;
+        }
+    }
+
     private void StartCutscene(List<CutsceneStep> steps)
     {
         StartCoroutine(ExecuteCutscene(steps));
@@ -115,5 +127,12 @@ public class SceneController : MonoBehaviour
             CutsceneStep.Wait(1f),
             CutsceneStep.DisplayText("Sort of.", 2f)
         });
+    }
+
+    public void InteractWithTree(InteractableObject obj)
+    {
+        StartCoroutine(
+            RotationTransform(obj.transform, new Vector3(60, 90, 6), 1)
+        );
     }
 }

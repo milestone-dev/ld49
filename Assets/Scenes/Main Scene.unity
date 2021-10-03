@@ -6085,35 +6085,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd5d96b234a944fc5a9d560d682f3d9a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 41.6
+      value: 43.85
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd5d96b234a944fc5a9d560d682f3d9a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7173798
+      value: 0.7061378
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd5d96b234a944fc5a9d560d682f3d9a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.43590137
+      value: 0.03700707
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd5d96b234a944fc5a9d560d682f3d9a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.48224443
+      value: 0.7061378
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd5d96b234a944fc5a9d560d682f3d9a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.25059244
+      value: 0.03700707
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd5d96b234a944fc5a9d560d682f3d9a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 60.124
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd5d96b234a944fc5a9d560d682f3d9a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 71.887
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd5d96b234a944fc5a9d560d682f3d9a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 7.02
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -5117700066308340382, guid: fd5d96b234a944fc5a9d560d682f3d9a, type: 3}
       propertyPath: m_Layer
@@ -6163,6 +6163,35 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.708323, y: 8.854819, z: 1.1049074}
   m_Center: {x: -0.21106234, y: 3.927209, z: -0.052422807}
+--- !u!114 &649051429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649051426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32fc932a52424053940647f12655934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerType: 0
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1848971200}
+        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
+        m_MethodName: InteractWithTree
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 649051429}
+          m_ObjectArgumentAssemblyTypeName: InteractableObject, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  interactionEnabled: 1
 --- !u!1001 &700437597
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6729,7 +6758,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 979285874}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.57, y: -0.37, z: 0}
+  m_LocalPosition: {x: -1.966, y: -0.37, z: -1.234}
   m_LocalScale: {x: 0.45428, y: 0.45428, z: 0.45428}
   m_Children: []
   m_Father: {fileID: 1982160303}
