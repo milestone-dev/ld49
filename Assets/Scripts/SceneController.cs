@@ -284,9 +284,6 @@ public class SceneController : MonoBehaviour
 
     public void InteractWithAlchemistSafe(InteractableObject obj)
     {
-        if (isRunningCutscene)
-            return;
-
         if (GameController.instance.PlayerIsHoldingItem(Item.Ruby))
         {
             GameController.instance.RemoveItem(Item.Ruby);
@@ -320,6 +317,9 @@ public class SceneController : MonoBehaviour
 
     public void InteractWithLighthouseKeypad(InteractableObject obj)
     {
+        if (isRunningCutscene)
+            return;
+
         keypadUIController.Activate();
     }
 
