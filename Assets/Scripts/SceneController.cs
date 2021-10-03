@@ -166,9 +166,16 @@ public class SceneController : MonoBehaviour
 
     }
 
-    public void InteractWith4(InteractableObject obj)
+    public void InteractWithAxe(InteractableObject obj)
     {
+        Destroy(obj.gameObject);
+        GameController.instance.AddItem(Item.Axe);
+    }
 
+    public void InteractWithShovel(InteractableObject obj)
+    {
+        Destroy(obj.gameObject);
+        GameController.instance.AddItem(Item.Shovel);
     }
 
     public void InteractWithLighthouse(InteractableObject obj)
