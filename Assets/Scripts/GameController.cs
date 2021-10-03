@@ -7,6 +7,7 @@ public enum Switch
 {
     None,
     KnowWhereTreasureIsBuried,
+    KnowCodeToLighthouse,
     HasUnlockedLighthouse,
     GameWon
 };

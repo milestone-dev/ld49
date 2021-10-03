@@ -7,6 +7,8 @@ public class SceneController : MonoBehaviour
     public static SceneController instance;
     private GameController gameController;
 
+    public GameObject safeRuby;
+
     public Transform respawnPoint;
 
     bool isRunningCutscene;
@@ -236,7 +238,28 @@ public class SceneController : MonoBehaviour
 
     public void InteractWithPirateBook(InteractableObject obj)
     {
-        GameController.instance.SetSwitch(Switch.KnowWhereTreasureIsBuried);
+        if (!GameController.instance.IsSwitchSet(Switch.KnowWhereTreasureIsBuried))
+            GameController.instance.SetSwitch(Switch.KnowWhereTreasureIsBuried);
+    }
+
+    public void InteractWithAlchemistSafe(InteractableObject obj)
+    {
+        if (GameController.instance.PlayerIsHoldingItem(Item.Ruby))
+        {
+            GameController.instance.RemoveItem(Item.Ruby);
+            PlayerController.instance.PutBackHeldItem();
+            safeRuby.SetActive(true);
+            StartCutscene(new List<CutsceneStep>()
+            {
+                CutsceneStep.MoveBy(obj.transform, new Vector3(-0.2f, 0, 0), 1f),
+            });
+        }
+    }
+
+    public void InteractWithAlchemistScroll(InteractableObject obj)
+    {
+        if (!GameController.instance.IsSwitchSet(Switch.KnowCodeToLighthouse))
+            GameController.instance.SetSwitch(Switch.KnowCodeToLighthouse);
     }
 
     public void InteractWithLighthouse(InteractableObject obj)
