@@ -271,27 +271,24 @@ public class SceneController : MonoBehaviour
             GameController.instance.SetSwitch(Switch.KnowCodeToLighthouse);
     }
 
-    public void InteractWithLighthouse(InteractableObject obj)
+    public void InteractWithLighthouseDoor(InteractableObject obj)
     {
-        if (gameController.IsSwitchSet(Switch.HasUnlockedLighthouse))
+        StartCutscene(new List<CutsceneStep>()
         {
-            StartCutscene(new List<CutsceneStep>()
-            {
-                CutsceneStep.DisplayText("Scientist: Who are you?", 4f),
-                CutsceneStep.Wait(2f),
-                CutsceneStep.DisplayText("You win!", 10f),
-            });
-        } else
-        {
-            keypadUIController.Activate();
-        }
+            CutsceneStep.DisplayText("Rattle rattle", 0.5f),
+        });
+    }
+
+    public void InteractWithLighthouseKeypad(InteractableObject obj)
+    {
+        keypadUIController.Activate();
     }
 
     public void InteractWithKeypadButton(Button button)
     {
         //1264
         string input = button.name;
-        Debug.LogFormat("Input {0} last={1} progress={2}", input, lastKeypadInput, keypadProgress);
+        //Debug.LogFormat("Input {0} last={1} progress={2}", input, lastKeypadInput, keypadProgress);
         if (input == "1")
         {
             keypadProgress = true;
@@ -318,10 +315,20 @@ public class SceneController : MonoBehaviour
             keypadProgress = true;
             gameController.SetSwitch(Switch.HasUnlockedLighthouse);
             keypadUIController.Dismiss();
+
+            Invoke("StartOutroCutscene", 0.5f);
             return;
         }
 
         keypadProgress = false;
+    }
+
+    void StartOutroCutscene()
+    {
+        StartCutscene(new List<CutsceneStep>()
+        {
+            CutsceneStep.DisplayText("Who are you?", 2f),
+        });
     }
 
 }
