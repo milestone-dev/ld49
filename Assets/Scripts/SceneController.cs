@@ -9,16 +9,13 @@ public class SceneController : MonoBehaviour
 
     public Transform respawnPoint;
 
+    bool isRunningCutscene;
+
     // Start is called before the first frame update
     void Start()
     {
         gameController = GetComponent<GameController>();
         instance = this;
-    }
-    private void EndCutscene()
-    {
-        gameController.RestoreMusicAudio();
-        Debug.Log("EndCutscene");
     }
 
     IEnumerator ScaleTransform(Transform transform, Vector3 upScale, float duration)
@@ -57,7 +54,20 @@ public class SceneController : MonoBehaviour
 
     private void StartCutscene(List<CutsceneStep> steps)
     {
+        if (isRunningCutscene)
+        {
+            Debug.Log("Attempting to start cutscene before the previous one finished");
+            return;
+        }
+        isRunningCutscene = true;
         StartCoroutine(ExecuteCutscene(steps));
+    }
+
+    private void EndCutscene()
+    {
+        isRunningCutscene = false;
+        gameController.RestoreMusicAudio();
+        Debug.Log("EndCutscene");
     }
 
     private IEnumerator ExecuteCutscene(List<CutsceneStep> steps)
@@ -135,4 +145,49 @@ public class SceneController : MonoBehaviour
             RotationTransform(obj.transform, new Vector3(60, 90, 6), 1)
         );
     }
+
+    public void InteractWithPond(InteractableObject obj)
+    {
+        if(GameController.instance.PlayerIsHoldingItem(Item.Vial))
+        {
+            GameController.instance.RemoveItem(Item.Vial);
+            GameController.instance.AddItem(Item.FilledVial);
+            GameController.instance.ResetHeldItem();
+        }
+    }
+
+    public void InteractWith2(InteractableObject obj)
+    {
+
+    }
+
+    public void InteractWith3(InteractableObject obj)
+    {
+
+    }
+
+    public void InteractWith4(InteractableObject obj)
+    {
+
+    }
+
+    public void InteractWithLighthouse(InteractableObject obj)
+    {
+        if (gameController.IsSwitchSet(Switch.HasUnlockedLighthouse))
+        {
+            StartCutscene(new List<CutsceneStep>()
+            {
+                CutsceneStep.DisplayText("Scientist: Who are you?", 4f),
+                CutsceneStep.Wait(2f),
+                CutsceneStep.DisplayText("You win!", 10f),
+            });
+        } else
+        {
+            StartCutscene(new List<CutsceneStep>()
+            {
+                CutsceneStep.DisplayText("You knock but nothing happens. The door is locked", 4f),
+            });
+        }
+    }
+
 }

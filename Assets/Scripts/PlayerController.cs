@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateInventoryManagement();
         UpdateCamera();
         UpdateMovement();
         UpdateInteraction();
@@ -58,6 +59,21 @@ public class PlayerController : MonoBehaviour
     public void Unfreeze()
     {
         frozen = false;
+    }
+
+    void UpdateInventoryManagement()
+    {
+        if (GameController.instance.PlayerIsHoldingItem(Item.None))
+        {
+            // Deactivate all display items
+        }
+
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            GameController.instance.SwitchToNextHeldItem();
+            Debug.LogFormat("Switching to item: {0}", GameController.instance.heldItem);
+            // TODO activate the right item
+        }
     }
 
     void UpdateCamera()

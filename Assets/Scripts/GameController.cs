@@ -6,14 +6,19 @@ using UnityEngine;
 public enum Switch
 {
     None,
-    Test
+    HasUnlockedLighthouse,
+    GameWon
 };
 
 public enum Item
 {
     None,
     Axe,
-    Key
+    Shovel,
+    Vial,
+    Ruby,
+    SodiumCrystal,
+    FilledVial
 };
 
 public class GameController : MonoBehaviour
@@ -24,6 +29,7 @@ public class GameController : MonoBehaviour
 
     public List<Switch> switches;
     public List<Item> inventoryItems;
+    public Item heldItem = Item.None;
 
     public Text captionText;
 
@@ -37,6 +43,7 @@ public class GameController : MonoBehaviour
         instance = this;
         captionText.gameObject.SetActive(false);
         interactionCursorActive.SetActive(false);
+        AddItem(Item.None);
     }
 
     // SWITCH MANAGEMENT
@@ -51,15 +58,43 @@ public class GameController : MonoBehaviour
         if (!switches.Contains(sw))
         {
             switches.Add(sw);
+            Debug.LogFormat("SetSwitch: {0}", sw);
         }
     }
 
     public void ClearSwitch(Switch sw)
     {
         switches.RemoveAll(obj => obj.Equals(sw));
+        Debug.LogFormat("ClearSwitch: {0}", sw);
+
     }
 
     // INVENTORY MANAGEMENT
+
+    public void SwitchToNextHeldItem() {
+        int itemIndex = inventoryItems.FindIndex(item => item == heldItem);
+        if (itemIndex == -1)
+            itemIndex = 0;
+
+        if (itemIndex < inventoryItems.Count - 1)
+        {
+            itemIndex++;
+        } else
+        {
+            itemIndex = 0;
+        }
+        heldItem = inventoryItems[itemIndex];
+    }
+
+    public void ResetHeldItem()
+    {
+        heldItem = 0;
+    }
+
+    public bool PlayerIsHoldingItem(Item item)
+    {
+        return heldItem == item;
+    }
 
     public bool PlayerHasItem(Item item)
     {
@@ -71,12 +106,14 @@ public class GameController : MonoBehaviour
         if (!inventoryItems.Contains(item))
         {
             inventoryItems.Add(item);
+            Debug.LogFormat("AddItem: {0}", item);
         }
     }
 
     public void RemoveItem(Item item)
     {
         inventoryItems.RemoveAll(obj => obj.Equals(item));
+        Debug.LogFormat("RemoveItem: {0}", item);
     }
 
     // INTERACTION AND TEXT MANAGEMENT
