@@ -159,57 +159,85 @@ public class SceneController : MonoBehaviour
 
     public void InteractWithDD1(InteractableObject obj)
     {
+        if (isRunningCutscene)
+            return;
+
         StartCutscene(new List<CutsceneStep>()
         {
-                CutsceneStep.DisplayText("Data Disc 1", 2f),
+            CutsceneStep.Transmission("Day 28. This is most confusing. This chunk of land appeared this morning, approximately around 8 - not that time carries any meaning here. Compared to the other ones it bears no unique features hinting at its origin. I will collect some soil samples for further analysis.", Resources.Load<AudioClip>("Audio/d01")),
         });
     }
 
     public void InteractWithDD2(InteractableObject obj)
     {
+        if (isRunningCutscene)
+            return;
+
         StartCutscene(new List<CutsceneStep>()
         {
-                CutsceneStep.DisplayText("Data Disc 2", 2f),
+            CutsceneStep.Transmission("Day 53: I am unable to explain the endless nature of this waterfall, but it's marvellous. I have found myself zone out, sitting beside it for hours. Based on the contents of the message in the bottle, this island seems to be from the late 17th century. In order not to tamper with the state of this island further, I left the message as I found it.", Resources.Load<AudioClip>("Audio/d02")),
         });
     }
 
     public void InteractWithDD3(InteractableObject obj)
     {
+        if (isRunningCutscene)
+            return;
+
         StartCutscene(new List<CutsceneStep>()
         {
-                CutsceneStep.DisplayText("Data Disc 3", 2f),
+                CutsceneStep.Transmission("Day 33: I originally struggled to reach this chunk of land. Only after felling a few trees and securing robust planks of wood, I managed to reach this part of land. This will make it easier for me to explore further. The wind protection and axe suggest this chunk must have been displaced from deep within the woods. A hiker perhaps?", Resources.Load<AudioClip>("Audio/d03")),
         });
     }
 
     public void InteractWithDD4(InteractableObject obj)
     {
+        if (isRunningCutscene)
+            return;
+
         StartCutscene(new List<CutsceneStep>()
         {
-                CutsceneStep.DisplayText("Data Disc 4", 2f),
+            CutsceneStep.Transmission("Day 87: Last sleep cycle - it doesn't make sense to call it 'night', I dreamt someone came here to rescue me. I woke up with renewed energy, and have spent the last few hours running a new series of tests, attempting to yet again reverse the trend of chunks of land appearing.", Resources.Load<AudioClip>("Audio/d04a")),
+            CutsceneStep.Transmission("My leading hypothesis is that my actions reversed the polarity of a quantum link, starting an avalanche of time intersections that seems to transport chunks of land from various parts of the 'normal' timeline. ", Resources.Load<AudioClip>("Audio/d04b")),
+
         });
     }
 
     public void InteractWithDD5(InteractableObject obj)
     {
+        if (isRunningCutscene)
+            return;
+
         StartCutscene(new List<CutsceneStep>()
         {
-                CutsceneStep.DisplayText("Data Disc 5", 2f),
+                CutsceneStep.Transmission("Day 99: The architecture of this tower must place this chunk of land in the early 13th century. The tower itself is simplistic and featureless, almost as if the builders didn't have time finish construction. Based on my somewhat limited knowledge of medieval history and  architecture, I am assuming its origin point is somewhere in eastern Europe.", Resources.Load<AudioClip>("Audio/d06a")),
+                CutsceneStep.Transmission("The barrels within are sealed shut, and I dare not break them open. The panel in the center of the room is most intriguing. My attempts to open it has so far failed. The socket-like hole seems to be shaped for some type of keystone. But what?", Resources.Load<AudioClip>("Audio/d06b")),
+
         });
     }
 
     public void InteractWithDD6(InteractableObject obj)
     {
+        if (isRunningCutscene)
+            return;
+
         StartCutscene(new List<CutsceneStep>()
         {
-                CutsceneStep.DisplayText("Data Disc 6", 2f),
+                CutsceneStep.Transmission("Day 286: Every day, there are more chunks of land appearing. Just more, and more. I don't know what to do anymore. The loneliness is overwhelming. All my attempts at reversing this has proven futile. If I only had someone to discuss my theories with. Then perhaps...", Resources.Load<AudioClip>("Audio/d06a")),
+                CutsceneStep.Transmission("While meeting another human remains my deepest wish, I also need to protect myself in case of an outsider entering this... place… with malicious intent. I think I will use the output from my recent radiometric dating analysis to ensure my security.", Resources.Load<AudioClip>("Audio/d06b")),
+
         });
     }
 
     public void InteractWithDD7(InteractableObject obj)
     {
+        if (isRunningCutscene)
+            return;
+
         StartCutscene(new List<CutsceneStep>()
         {
-                CutsceneStep.DisplayText("Data Disc 7", 2f),
+                CutsceneStep.Transmission("Day 1 since the incident. This is Doctor Dina Adelson. I am starting a new audio notebook to document this experiment. After numerous failed attempts at establishing a quantum link, I must have finally succeeded.", Resources.Load<AudioClip>("Audio/d07a")),
+                CutsceneStep.Transmission("After the flash, everything in a 20 meter radius, myself included, seem to have been displaced to some type of dimension, because this is surely not the Norwegian coast. I will begin measure time using my atomic clock, for however long my generator lasts.", Resources.Load<AudioClip>("Audio/d07b")),
         });
     }
 
@@ -253,6 +281,9 @@ public class SceneController : MonoBehaviour
 
     public void InteractWithAlchemistSafe(InteractableObject obj)
     {
+        if (isRunningCutscene)
+            return;
+
         if (GameController.instance.PlayerIsHoldingItem(Item.Ruby))
         {
             GameController.instance.RemoveItem(Item.Ruby);
