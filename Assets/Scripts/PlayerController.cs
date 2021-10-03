@@ -110,7 +110,8 @@ public class PlayerController : MonoBehaviour
         }
 
         if (updateInventoryDisplay) {
-            switch(GameController.instance.heldItem)
+            HideAllHeldItems();
+            switch (GameController.instance.heldItem)
             {
                 case Item.Axe:
                     heldItemAxe.SetActive(true);

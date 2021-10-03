@@ -131,16 +131,6 @@ public class SceneController : MonoBehaviour
         PlayerController.instance.MoveTo(respawnPoint.position);
     }
 
-    public void InteractWithPlaceholderObject(InteractableObject obj)
-    {
-        StartCutscene(new List<CutsceneStep>()
-        {
-            CutsceneStep.DisplayText("It works", 4f),
-            CutsceneStep.Wait(1f),
-            CutsceneStep.DisplayText("Sort of.", 2f)
-        });
-    }
-
     public void InteractWithTree(InteractableObject obj)
     {
         if (GameController.instance.PlayerIsHoldingItem(Item.Axe))
@@ -167,14 +157,60 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    public void InteractWith2(InteractableObject obj)
+    public void InteractWithDD1(InteractableObject obj)
     {
-
+        StartCutscene(new List<CutsceneStep>()
+        {
+                CutsceneStep.DisplayText("Data Disc 1", 2f),
+        });
     }
 
-    public void InteractWith3(InteractableObject obj)
+    public void InteractWithDD2(InteractableObject obj)
     {
+        StartCutscene(new List<CutsceneStep>()
+        {
+                CutsceneStep.DisplayText("Data Disc 2", 2f),
+        });
+    }
 
+    public void InteractWithDD3(InteractableObject obj)
+    {
+        StartCutscene(new List<CutsceneStep>()
+        {
+                CutsceneStep.DisplayText("Data Disc 3", 2f),
+        });
+    }
+
+    public void InteractWithDD4(InteractableObject obj)
+    {
+        StartCutscene(new List<CutsceneStep>()
+        {
+                CutsceneStep.DisplayText("Data Disc 4", 2f),
+        });
+    }
+
+    public void InteractWithDD5(InteractableObject obj)
+    {
+        StartCutscene(new List<CutsceneStep>()
+        {
+                CutsceneStep.DisplayText("Data Disc 5", 2f),
+        });
+    }
+
+    public void InteractWithDD6(InteractableObject obj)
+    {
+        StartCutscene(new List<CutsceneStep>()
+        {
+                CutsceneStep.DisplayText("Data Disc 6", 2f),
+        });
+    }
+
+    public void InteractWithDD7(InteractableObject obj)
+    {
+        StartCutscene(new List<CutsceneStep>()
+        {
+                CutsceneStep.DisplayText("Data Disc 7", 2f),
+        });
     }
 
     public void InteractWithAxe(InteractableObject obj)
