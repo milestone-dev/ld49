@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SceneController : MonoBehaviour
 {
@@ -10,6 +11,13 @@ public class SceneController : MonoBehaviour
     public GameObject safeRuby;
 
     public Transform respawnPoint;
+
+    public UIController bookUIController;
+    public UIController scrollUIController;
+    public UIController keypadUIController;
+
+    bool keypadProgress;
+    string lastKeypadInput;
 
     bool isRunningCutscene;
 
@@ -238,6 +246,7 @@ public class SceneController : MonoBehaviour
 
     public void InteractWithPirateBook(InteractableObject obj)
     {
+        bookUIController.Activate();
         if (!GameController.instance.IsSwitchSet(Switch.KnowWhereTreasureIsBuried))
             GameController.instance.SetSwitch(Switch.KnowWhereTreasureIsBuried);
     }
@@ -274,11 +283,45 @@ public class SceneController : MonoBehaviour
             });
         } else
         {
-            StartCutscene(new List<CutsceneStep>()
-            {
-                CutsceneStep.DisplayText("You knock but nothing happens. The door is locked", 4f),
-            });
+            keypadUIController.Activate();
         }
+    }
+
+    public void InteractWithKeypadButton(Button button)
+    {
+        //1264
+        string input = button.name;
+        Debug.LogFormat("Input {0} last={1} progress={2}", input, lastKeypadInput, keypadProgress);
+        if (input == "1")
+        {
+            keypadProgress = true;
+            lastKeypadInput = input;
+            return;
+        }
+
+        if (keypadProgress && lastKeypadInput == "1" && input == "2")
+        {
+            keypadProgress = true;
+            lastKeypadInput = input;
+            return;
+        }
+
+        if (keypadProgress && lastKeypadInput == "2" && input == "6")
+        {
+            keypadProgress = true;
+            lastKeypadInput = input;
+            return;
+        }
+
+        if (keypadProgress && lastKeypadInput == "6" && input == "4")
+        {
+            keypadProgress = true;
+            gameController.SetSwitch(Switch.HasUnlockedLighthouse);
+            keypadUIController.Dismiss();
+            return;
+        }
+
+        keypadProgress = false;
     }
 
 }
